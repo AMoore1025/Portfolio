@@ -1,4 +1,41 @@
+body {
+    background-color: black;
+    overflow-x: hidden;
+}
+
 p {
-    color: black;
+    color: white;
     text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: white;
+    text-align: center;
+}
+
+.introduction {
+    color: white;
+    text-align: center;
+    background-color: black;
+    border: 1px solid white;
+    max-width: 600px;
+    margin: 1rem auto;
+    padding: 2rem;
+}
+
+.introduction::before {
+    content: "Alex Moore";
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: black;
+    font-size: 24px;
+    padding: 0 10px;
+}
+
+#Galaxy {
+    display: block;
+    position: fixed;
+    z-index: -99;
 }
