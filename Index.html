@@ -7,11 +7,18 @@
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <link href="SiteStyle/global.css" rel="stylesheet" />
         </head>
+
         <body>
+            <script src="Scripts/SiteScript.js"></script>
+            <!--Background animation-->
             <canvas id="Galaxy"></canvas>
             <script src="Scripts/Galaxy.js"></script>
 
+            <!--Main content-->
             <div class="container">
+                <div id="menu">
+                </div>
+                <span id="navBtn" onclick="toggleNav()">Open</span>
                 <div class="introduction">
                     
                     <p>Welcome to my portfolio! I am a computer science student at Wright State University, passionate about developing software, cybersecurity, and all things technical.</p>

@@ -41,6 +41,8 @@ const canvas = document.getElementById('Galaxy');
             //     angle = Math.atan2(mouse.y, mouse.x);
             // });
             
+
+            // Updates canvas when the window is resized
             addEventListener('resize', () => {
                 canvas.width = innerWidth;
                 canvas.height = innerHeight;
@@ -59,6 +61,7 @@ const canvas = document.getElementById('Galaxy');
         this.color = color;
       }
       
+      // draws each star onto the canvas
       Star.prototype.draw = function() {
         c.save();
         c.beginPath();

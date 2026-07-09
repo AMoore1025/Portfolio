@@ -13,6 +13,33 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
 }
 
+/* Style for the navigation bar */
+
+#menu {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: white;
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+#navBtn {
+    position: fixed;
+    color:white; 
+    background-color: black;
+    border: 1px solid white;
+    padding: 10px 15px;
+    font-size:30px; 
+    cursor:pointer;
+    z-index: 2;
+}
+
+/* Style for introduction section */
+
 .introduction {
     color: white;
     text-align: center;
@@ -25,10 +52,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .introduction::before {
     content: "Alex Moore";
-    position: absolute;
-    top: 0px;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative;
+    top: -3rem;
     background-color: black;
     font-size: 24px;
     padding: 0 10px;
