@@ -115,11 +115,11 @@ const canvas = document.getElementById('Galaxy');
                 particles = [];
                 backgroundStars = [];
                 
-                const particleCount = 1000;
+                const particleCount = 3000;
                 const starCount = 200;
                 const hueIncrement = 100 / particleCount;
                 const lightIncrement = -100 / particleCount;
-                const maxRadius = 3;
+                const maxRadius = 2;
                 const galaxyRadius = Math.min(canvas.width, canvas.height) * 0.6;
                 
                 

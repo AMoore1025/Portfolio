@@ -80,17 +80,25 @@ h1, h2, h3, h4, h5, h6 {
 #bar {
     display: block;
     position: relative;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-out;
 }
 
 #bar::before {
     top: -2vw;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease;
+}
+
+#navBtn:hover #bar:not(.active)::before {
+    top: -2.5vw;
+}
+
+#navBtn:hover #bar:not(.active)::after {
+    top: 2.5vw;
 }
 
 #bar::after {
     top: 2vw;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease;
 }
 
 #bar.active {
@@ -101,6 +109,14 @@ h1, h2, h3, h4, h5, h6 {
     transform: rotate(45deg);
     top: 0;
     background-color: black;
+}
+
+#navBtn:hover #bar.active::before {
+    transform: rotate(-135deg);
+}
+
+#navBtn:hover #bar.active::after {
+    transform: rotate(135deg);
 }
 
 #bar.active::after  {
