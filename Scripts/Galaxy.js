@@ -59,6 +59,7 @@ const canvas = document.getElementById('Galaxy');
         this.y = y;
         this.radius = radius;
         this.color = color;
+        this.opacity = 0 //starts invisible, then fades in
       }
       
       // draws each star onto the canvas
@@ -66,7 +67,7 @@ const canvas = document.getElementById('Galaxy');
         c.save();
         c.beginPath();
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-        c.fillStyle = this.color;
+        c.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
         c.shadowColor = '#E3EAEF';
         c.shadowBlur = 20;
         c.fill();
@@ -84,24 +85,27 @@ const canvas = document.getElementById('Galaxy');
                 this.radius = radius;
                 this.color = color;
                 this.distanceFromCenter = distanceFromCenter;
+
+                this.offsetX = (Math.random() - 0.5) * 50;
+                this.offsetY = (Math.random() - 0.5) * 2;
             }
             
             Particle.prototype.draw = function() {
                 c.beginPath();
-                c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+                c.arc((this.x + this.offsetX), (this.y + this.offsetY), this.radius, 0, Math.PI * 2, false);
                 c.fillStyle = this.color;
                 c.fill();
                 c.closePath();
             };
             
             Particle.prototype.update = function(timer) {
-                this.draw();
-                
                 const {cos, sin} = Math;
                 const {distanceFromCenter} = this;
                 
                 this.x = center.x + distanceFromCenter * cos(0.5) * cos(timer + distanceFromCenter);
                 this.y = center.y + distanceFromCenter * sin(angle) * sin(timer + distanceFromCenter);
+
+                this.draw();
             };
             
             // Implementation
@@ -111,25 +115,39 @@ const canvas = document.getElementById('Galaxy');
                 particles = [];
                 backgroundStars = [];
                 
-                const particleCount = 500;
+                const particleCount = 1000;
                 const starCount = 200;
                 const hueIncrement = 100 / particleCount;
                 const lightIncrement = -100 / particleCount;
-                const baseRadius = 3;
+                const maxRadius = 3;
+                const galaxyRadius = Math.min(canvas.width, canvas.height) * 0.6;
                 
                 
                 
                 for (let i = 0; i < particleCount; i++) {
-                    const x = canvas.width / 2 + i * Math.cos(1);
-                    const y = canvas.height / 2 + i * Math.sin(1);
+                    // Spread stars across the galaxy radius
+                    const distance = Math.pow((i / particleCount), 2) * galaxyRadius;
+
+                    // Add slight randomness to placement
+                    const angle = Math.random() * 2 * Math.PI;
+                    const distanceOffset = Math.random() * 20 - 10;
+
+                    const x = center.x + (distance + distanceOffset) * Math.cos(angle);
+                    const y = center.y + (distance + distanceOffset) * Math.sin(angle);
+                    const radius = Math.random() * maxRadius;
+
+                    // Calculate color based on distance from center
+                    const hue = distance / galaxyRadius;
+
+                    const color = `hsl(200, ${hue * 100}%, ${100 - hue * 100}%)`;
                     
-                    particles.push(new Particle(x, y, baseRadius, `hsl(200, ${hueIncrement * i}%, ${lightIncrement * i + 100}%)`, i));
+                    particles.push(new Particle(x, y, radius, color, distance + distanceOffset));
                 }
                 
                 for (let u = 0; u < starCount; u++) {
                     const x2 = Math.random() * canvas.width;
                     const y2 = Math.random() * canvas.height;
-                    const radius = Math.random() * 3;
+                    const radius = Math.random() * 1;
                     
                     backgroundStars.push(new Star(x2, y2, radius, 'white'));
                 }
@@ -143,6 +161,7 @@ const canvas = document.getElementById('Galaxy');
                 c.fillRect(0, 0, canvas.width, canvas.height);
                 
                 backgroundStars.forEach(backgroundStar => {
+                    backgroundStar.opacity += 0.005; // Fade in the background stars
                     backgroundStar.draw();
                 });
                 
@@ -150,7 +169,7 @@ const canvas = document.getElementById('Galaxy');
                     particle.update(timer);
                 });
                  
-                timer += 0.001;
+                timer += 0.0001;
             }
             
             init();
