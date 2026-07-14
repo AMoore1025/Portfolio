@@ -66,7 +66,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #bar, #bar::before, #bar::after {
     width: clamp(20px, 100%, 100px);
-    height: 0.6vw;
+    height: 0.4vw;
     background-color: white;
     border-radius: 10px;
 }
@@ -140,6 +140,62 @@ h1, h2, h3, h4, h5, h6 {
 #menu a {
     text-decoration: none;
     color: black;
+}
+
+/* Style for the slider */
+.slider {
+    position: fixed;
+    bottom: 10px;
+    left: 90%;
+    transform: translateX(-90%);
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    width: 20vw;
+    border: 1px solid white;
+}
+
+.sliderInput {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    margin: 5px;
+    background: black;
+    outline: none;
+    display: block;
+}
+
+.sliderInput:hover {
+    opacity: 1;
+}
+
+.sliderInput::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.sliderInput::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+}
+
+.sliderInput::-moz-range-progress {
+    height: 10px;
+    border-radius: 5px;
+    background: white;
+}
+
+.sliderText {
+    color: white;
+    font-size: 14px;
+    margin: 5px 0;
 }
 
 /* Style for introduction section */

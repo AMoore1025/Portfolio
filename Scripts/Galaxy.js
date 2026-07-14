@@ -43,24 +43,26 @@ const canvas = document.getElementById('Galaxy');
             
 
             // Updates canvas when the window is resized
-            addEventListener('resize', () => {
-                canvas.width = innerWidth;
-                canvas.height = innerHeight;
+    addEventListener('resize', () => {
+        canvas.width = innerWidth;
+        canvas.height = innerHeight;
 
-                center.x = canvas.width / 2;
-                center.y = canvas.height / 2;
+        center.x = canvas.width / 2;
+        center.y = canvas.height / 2;
+
+        galaxy.galaxyRadius = Math.min(canvas.width, canvas.height) * 0.6;
                 
-                init();
-            });
+        init();
+    });
             
             //Objects
-            function Star(x, y, radius, color) {
+    function Star(x, y, radius, color) {
         this.x = x;
         this.y = y;
         this.radius = radius;
         this.color = color;
         this.opacity = 0 //starts invisible, then fades in
-      }
+    }
       
       // draws each star onto the canvas
       Star.prototype.draw = function() {
@@ -111,38 +113,22 @@ const canvas = document.getElementById('Galaxy');
             // Implementation
             let particles;
             let backgroundStars;
+            let galaxy = {
+                particleCount: 3000,
+                galaxyRadius: Math.min(canvas.width, canvas.height) * 0.6,
+                maxRadius: 2
+            };
+            let rotationSpeed = 0.0001;
             function init() {
                 particles = [];
                 backgroundStars = [];
                 
-                const particleCount = 3000;
                 const starCount = 200;
-                const hueIncrement = 100 / particleCount;
-                const lightIncrement = -100 / particleCount;
-                const maxRadius = 2;
-                const galaxyRadius = Math.min(canvas.width, canvas.height) * 0.6;
+                const hueIncrement = 100 / galaxy.particleCount;
+                const lightIncrement = -100 / galaxy.particleCount;
                 
-                
-                
-                for (let i = 0; i < particleCount; i++) {
-                    // Spread stars across the galaxy radius
-                    const distance = Math.pow((i / particleCount), 2) * galaxyRadius;
-
-                    // Add slight randomness to placement
-                    const angle = Math.random() * 2 * Math.PI;
-                    const distanceOffset = Math.random() * 20 - 10;
-
-                    const x = center.x + (distance + distanceOffset) * Math.cos(angle);
-                    const y = center.y + (distance + distanceOffset) * Math.sin(angle);
-                    const radius = Math.random() * maxRadius;
-
-                    // Calculate color based on distance from center
-                    const hue = distance / galaxyRadius;
-
-                    const color = `hsl(200, ${hue * 100}%, ${100 - hue * 100}%)`;
-                    
-                    particles.push(new Particle(x, y, radius, color, distance + distanceOffset));
-                }
+                // Create the galaxy particles
+                createGalaxy(galaxy.particleCount, galaxy.galaxyRadius, galaxy.maxRadius);
                 
                 for (let u = 0; u < starCount; u++) {
                     const x2 = Math.random() * canvas.width;
@@ -169,8 +155,60 @@ const canvas = document.getElementById('Galaxy');
                     particle.update(timer);
                 });
                  
-                timer += 0.0001;
+                timer += rotationSpeed;
             }
+
+            function createGalaxy(particleCount, galaxyRadius, maxRadius) {
+
+                for (let i = 0; i < particleCount; i++) {
+                    particleSetup(particleCount, galaxyRadius, maxRadius, i);
+                }
+            }
+
+            //Initializes each galaxy particle
+
+            function particleSetup(particleCount, galaxyRadius, maxRadius, i) {
+                // Spread stars across the galaxy radius
+                    const distance = Math.pow((i / particleCount), 2) * galaxyRadius;
+
+                    // Add slight randomness to placement
+                    const angle = Math.random() * 2 * Math.PI;
+                    const distanceOffset = Math.random() * 20 - 10;
+
+                    const x = center.x + (distance + distanceOffset) * Math.cos(angle);
+                    const y = center.y + (distance + distanceOffset) * Math.sin(angle);
+                    const radius = Math.random() * maxRadius;
+
+                    // Calculate color based on distance from center
+                    const hue = distance / galaxyRadius;
+
+                    const color = `hsl(200, ${hue * 100}%, ${100 - hue * 100}%)`;
+
+                    particles.push(new Particle(x, y, radius, color, distance + distanceOffset));
+            }
+
+            // Updates the features of the galaxy in real time
+            function updateGalaxyStars(value) {
+                galaxy.particleCount = value;
+
+                rebuildGalaxy();
+
+                document.getElementById("starNumText").textContent = `Star Count: ${value}`;
+            }
+
+            // Changes the speed at which the stars rotate
+            function updateGalaxySpeed(value) {
+                rotationSpeed = Number(value);
+
+                document.getElementById("starSpeedText").textContent = `Star Speed: ${value}`;
+            }
+
+            function rebuildGalaxy() {
+                particles = [];
+
+                createGalaxy(galaxy.particleCount, galaxy.galaxyRadius, galaxy.maxRadius);
+            }
+
             
             init();
             animate();
