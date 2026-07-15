@@ -20,25 +20,15 @@
                 <p class="sliderText" id="starNumText">Star Count: 3000</p>
                 <input type="range" min="0" max="0.1" value="0.0001" step="0.0001" class="sliderInput" id="starSpeedSlider" oninput="updateGalaxySpeed(this.value)">
                 <p class="sliderText" id="starSpeedText">Star Speed: 0.0001</p>
+                <input type="range" min="0" max="255" value="200" class="sliderInput" id="starColorSlider" oninput="updateGalaxyColor(this.value)">
+                <p class="sliderText" id="starColorText">Star Color</p>
             </div>
 
             <!--Main content-->
             <div class="container">
-                <div id="menu">
-                    <ul>
-                        <li id="filler"></li>
-                        <li class="navContent"><a href="index.html">Home</a></li>
-                        <li class="navContent"><a href="about.html">About</a></li>
-                        <li class="navContent"><a href="project.html">Projects</a></li>
-                        <li class="navContent"><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <button id="navBtn" onclick="toggleNav()">
-                    <span id="bar"></span>
-                </button>
-                <div class="introduction">
-                    
-                    <p>Welcome to my portfolio! I am a computer science student at Wright State University, passionate about developing software, cybersecurity, and all things technical.</p>
+                <div class="title">
+                    <h1>Alex Moore</h1>
+                    <p>Building software, exploring cybersecurity, and creating practical solutions</p>
                 </div>
             </div>
         </body>

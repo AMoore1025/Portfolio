@@ -116,7 +116,8 @@ const canvas = document.getElementById('Galaxy');
             let galaxy = {
                 particleCount: 3000,
                 galaxyRadius: Math.min(canvas.width, canvas.height) * 0.6,
-                maxRadius: 2
+                maxRadius: 2,
+                hslValue: 200
             };
             let rotationSpeed = 0.0001;
             function init() {
@@ -128,7 +129,7 @@ const canvas = document.getElementById('Galaxy');
                 const lightIncrement = -100 / galaxy.particleCount;
                 
                 // Create the galaxy particles
-                createGalaxy(galaxy.particleCount, galaxy.galaxyRadius, galaxy.maxRadius);
+                createGalaxy(galaxy.particleCount, galaxy.galaxyRadius, galaxy.maxRadius, galaxy.hslValue);
                 
                 for (let u = 0; u < starCount; u++) {
                     const x2 = Math.random() * canvas.width;
@@ -158,16 +159,16 @@ const canvas = document.getElementById('Galaxy');
                 timer += rotationSpeed;
             }
 
-            function createGalaxy(particleCount, galaxyRadius, maxRadius) {
+            function createGalaxy(particleCount, galaxyRadius, maxRadius, colorVal) {
 
                 for (let i = 0; i < particleCount; i++) {
-                    particleSetup(particleCount, galaxyRadius, maxRadius, i);
+                    particleSetup(particleCount, galaxyRadius, maxRadius, i, colorVal);
                 }
             }
 
             //Initializes each galaxy particle
 
-            function particleSetup(particleCount, galaxyRadius, maxRadius, i) {
+            function particleSetup(particleCount, galaxyRadius, maxRadius, i, colorVal) {
                 // Spread stars across the galaxy radius
                     const distance = Math.pow((i / particleCount), 2) * galaxyRadius;
 
@@ -182,7 +183,7 @@ const canvas = document.getElementById('Galaxy');
                     // Calculate color based on distance from center
                     const hue = distance / galaxyRadius;
 
-                    const color = `hsl(200, ${hue * 100}%, ${100 - hue * 100}%)`;
+                    const color = `hsl(${colorVal}, ${hue * 100}%, ${100 - hue * 100}%)`;
 
                     particles.push(new Particle(x, y, radius, color, distance + distanceOffset));
             }
@@ -203,10 +204,16 @@ const canvas = document.getElementById('Galaxy');
                 document.getElementById("starSpeedText").textContent = `Star Speed: ${value}`;
             }
 
+            function updateGalaxyColor(value) {
+                galaxy.hslValue = value;
+
+                rebuildGalaxy();
+            }
+
             function rebuildGalaxy() {
                 particles = [];
 
-                createGalaxy(galaxy.particleCount, galaxy.galaxyRadius, galaxy.maxRadius);
+                createGalaxy(galaxy.particleCount, galaxy.galaxyRadius, galaxy.maxRadius, galaxy.hslValue);
             }
 
             
