@@ -25,6 +25,8 @@
 body {
     background-color: black;
     overflow-x: hidden;
+    padding: 0;
+    margin: 0;
 }
 
 p {
@@ -38,6 +40,158 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Style for the navigation bar */
+.nav {
+    position: fixed;
+    margin: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(10px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
+}
+
+.nav a {
+    text-decoration: none;
+    color: white;
+    font-size: clamp(1rem, 3vw, 2rem);
+    padding: 10px;
+}
+
+/* style for Title section */
+.title {
+    z-index: -98;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.title h1, .title p {
+    position: relative;
+    text-shadow: 0 0 2px black,
+                 0 0 6px white;
+    top: 30%;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+}
+
+.title h1 {
+    font-size: clamp(2rem, 8vw, 4rem);
+}
+
+.title p {
+    font-size: 1em;
+}
+
+
+/* Style for main content */
+.content {
+    width: 100%;
+    height: 200vh;
+    background-color: black;
+}
+
+.content::before {
+    content: "Scroll | Down";
+    display: block;
+    text-align: center;
+    position: relative;
+    top: -3rem;
+    color: white;
+}
+
+/* Style for the slider */
+.slider {
+    position: fixed;
+    bottom: 10px;
+    left: 95%;
+    transform: translateX(-90%);
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    width: min(200px, 40vw);
+    border: 1px solid white;
+    z-index: 0;
+}
+
+.sliderInput {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    background: black;
+    outline: none;
+    display: block;
+}
+
+.sliderInput:hover {
+    opacity: 1;
+}
+
+.sliderInput::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 3px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.sliderInput::-moz-range-thumb {
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    border: 3px solid white;
+    background: black;
+    cursor: pointer;
+}
+
+.sliderInput::-moz-range-progress {
+    height: 0.1em;
+    border-radius: 5px;
+    background: white;
+}
+
+.sliderText {
+    color: white;
+    font-size: clamp(0.7rem, 1vw, 1rem);
+    margin: 5px 0;
+}
+
+#Galaxy {
+    display: block;
+    position: fixed;
+    z-index: -99;
+}
+
+/* Style for introduction section
+
+NOTE: THIS SECTION ISN"T USED ANYMORE
+
+.introduction {
+    color: white;
+    text-align: center;
+    background-color: black;
+    border: 1px solid white;
+    max-width: 600px;
+    margin: 1rem auto;
+    padding: 2rem;
+}
+
+.introduction::before {
+    content: "Alex Moore";
+    position: relative;
+    top: -3rem;
+    background-color: black;
+    font-size: 24px;
+    padding: 0 10px;
+}
+
+STYLE FOR OLD MENU
 
 #menu {
     height: 100%;
@@ -140,117 +294,6 @@ h1, h2, h3, h4, h5, h6 {
 #menu a {
     text-decoration: none;
     color: black;
-}
-
-/* Style for the slider */
-.slider {
-    position: fixed;
-    bottom: 10px;
-    left: 95%;
-    transform: translateX(-90%);
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 10px;
-    width: min(200px, 40vw);
-    border: 1px solid white;
-    z-index: -1;
-}
-
-.sliderInput {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    background: black;
-    outline: none;
-    display: block;
-}
-
-.sliderInput:hover {
-    opacity: 1;
-}
-
-.sliderInput::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    border: 3px solid white;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-.sliderInput::-moz-range-thumb {
-    width: 1em;
-    height: 1em;
-    border-radius: 50%;
-    border: 3px solid white;
-    background: black;
-    cursor: pointer;
-}
-
-.sliderInput::-moz-range-progress {
-    height: 0.1em;
-    border-radius: 5px;
-    background: white;
-}
-
-.sliderText {
-    color: white;
-    font-size: clamp(0.7rem, 1vw, 1rem);
-    margin: 5px 0;
-}
-
-#Galaxy {
-    display: block;
-    position: fixed;
-    z-index: -99;
-}
-
-/* style for Title section */
-.title {
-    position: fixed;
-    left: 50%;
-    top: 40%;
-    transform: translate(-50%, -75%);
-    z-index: -1;
-}
-
-.title h1, .title p {
-    text-shadow: 0 0 2px black,
-                 0 0 6px white;
-    margin: 0;
-    padding: 0;
-    line-height: 1;
-}
-
-.title h1 {
-    font-size: clamp(2rem, 8vw, 4rem);
-}
-
-.title p {
-    font-size: 1em;
-}
-
-/* Style for introduction section
-
-NOTE: THIS SECTION ISN"T USED ANYMORE
-
-.introduction {
-    color: white;
-    text-align: center;
-    background-color: black;
-    border: 1px solid white;
-    max-width: 600px;
-    margin: 1rem auto;
-    padding: 2rem;
-}
-
-.introduction::before {
-    content: "Alex Moore";
-    position: relative;
-    top: -3rem;
-    background-color: black;
-    font-size: 24px;
-    padding: 0 10px;
 }
 
 */
