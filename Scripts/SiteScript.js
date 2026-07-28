@@ -1,14 +1,19 @@
-let menuOpen = false;
+// Code for main body content
+const observer = new IntersectionObserver((entries) => {
 
-function toggleNav() {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+        }
 
-    if (!menuOpen) {
-        document.getElementById("menu").style.width = "30%";
-        document.getElementById("bar").classList.add("active");
-        menuOpen = true;
-    } else {
-        document.getElementById("menu").style.width = "0%";
-        document.getElementById("bar").classList.remove("active");
-        menuOpen = false;
-    }
-}
+        if (!entry.isIntersecting) {
+            entry.target.classList.remove("show");
+        }
+    });
+});
+
+const projects = document.querySelectorAll(".project");
+
+projects.forEach(project => {
+    observer.observe(project);
+});
