@@ -14,13 +14,22 @@
             <script src="Scripts/Galaxy.js"></script>
 
             <!--Galaxy features slider-->
-            <div class="slider">
-                <input type="range" min="100" max="10000" value="3000" class="sliderInput" id="starNumSlider" oninput="updateGalaxyStars(this.value)">
-                <p class="sliderText" id="starNumText">Star Count: 3000</p>
-                <input type="range" min="0" max="0.1" value="0.0001" step="0.0001" class="sliderInput" id="starSpeedSlider" oninput="updateGalaxySpeed(this.value)">
-                <p class="sliderText" id="starSpeedText">Star Speed: 0.0001</p>
-                <input type="range" min="0" max="255" value="200" class="sliderInput" id="starColorSlider" oninput="updateGalaxyColor(this.value)">
-                <p class="sliderText" id="starColorText">Star Color</p>
+            <div id="slider" class="slideHide">
+                <button id="settingsButton" onclick="toggleMenu();">⚙ Galaxy Settings</button>
+                <div class="sliderContent">
+                    <div class="sliderBar">
+                        <input type="range" min="100" max="10000" value="3000" class="sliderInput" id="starNumSlider" oninput="updateGalaxyStars(this.value)">
+                        <p class="sliderText" id="starNumText">Star Count: 3000</p>
+                    </div>
+                    <div class="sliderBar">
+                        <input type="range" min="0" max="0.1" value="0.0001" step="0.0001" class="sliderInput" id="starSpeedSlider" oninput="updateGalaxySpeed(this.value)">
+                        <p class="sliderText" id="starSpeedText">Star Speed: 0.0001</p>
+                    </div>
+                    <div class="sliderBar">
+                        <input type="range" min="0" max="255" value="200" class="sliderInput" id="starColorSlider" oninput="updateGalaxyColor(this.value)">
+                        <p class="sliderText" id="starColorText">Star Color</p>
+                    </div>
+                </div>
             </div>
 
             <!--Navigation bar-->
